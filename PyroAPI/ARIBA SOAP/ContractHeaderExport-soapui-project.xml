@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="49ceb5e8-a2c1-4158-ac51-623061de371c" activeEnvironment="Default" name="ContractHeaderExport" resourceRoot="" soapui-version="5.6.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="978fa892-b5a5-4305-9013-4708d1f24f76" wsaVersion="NONE" name="ContractHeaderExportBinding" type="wsdl" bindingName="{urn:Ariba:Sourcing:vrealm_51073}ContractHeaderExportBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/efras/OneDrive/FOS/Customers/SAEC/ARIBA/ContractHeaderExport.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\Users\efras\OneDrive\FOS\Customers\SAEC\ARIBA\ContractHeaderExport.xml"><con:part><con:url>file:\C:\Users\efras\OneDrive\FOS\Customers\SAEC\ARIBA\ContractHeaderExport.xml</con:url><con:content><![CDATA[<wsdl:definitions name="ContractHeaderExport" targetNamespace="urn:Ariba:Sourcing:vrealm_51073" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:typens="urn:Ariba:Sourcing:vrealm_51073" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="urn:Ariba:Sourcing:vrealm_51073">
+      <xsd:element name="Headers">
+        <xsd:complexType>
+          <xsd:all>
+            <xsd:element maxOccurs="1" minOccurs="0" name="variant" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="partition" type="xsd:string"/>
+          </xsd:all>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ContractHeaderExportRequest">
+        <xsd:complexType>
+          <xsd:all>
+            <xsd:element minOccurs="0" name="WSContractHeaderExportInputBean_Item">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element maxOccurs="1" minOccurs="0" name="item" type="typens:WSContractHeaderExportInputBean"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:all>
+          <xsd:attribute name="partition" type="xsd:string"/>
+          <xsd:attribute name="variant" type="xsd:string"/>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ContractHeaderExportReply">
+        <xsd:complexType>
+          <xsd:all>
+            <xsd:element minOccurs="0" name="WSContractHeaderExportOutputBean_Item">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element maxOccurs="1" minOccurs="0" name="item" type="typens:WSContractHeaderExportOutputBean"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:all>
+          <xsd:attribute name="partition" type="xsd:string"/>
+          <xsd:attribute name="variant" type="xsd:string"/>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="WSContractHeaderExportInputBean">
+        <xsd:all>
+          <xsd:element minOccurs="1" name="ClassName" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Specifies the type of workspace headers to be exported.  Valid values: ariba.collaborate.contracts.ContractWorkspace (procurement contract workspaces), ariba.collaborate.contracts.ContractRequest (procurement contract requests), ariba.collaborate.contracts.SalesContractWorkspace (sales contract workspaces), ariba.collaborate.contracts.SalesContractRequest (sales contract requests), ariba.collaborate.contracts.InternalContractWorkspace (internal contract workspaces).</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ContractIds" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>List of contract IDs for which the headers will be exported, comma separated. For example: CW2005,CW2006.If omitted, the web service exports headers for all contract workspaces with any contract ID and that meet criteria specified in the other elements. You must specify at least one filter (ContractIds, ContractStatus, a FromDate and ToDate pair, or WorkspaceIds).If you specify ContractStatus, you must also specify a FromDate and ToDate pair.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ContractStatus" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Specifies the status of the workspaces that will be exported. This element is ignored if no date range is specified. Valid values: NotCreated, Draft, Publishing, Pending, Published, OnHold, Expired, Closed.  If omitted, the web service exports headers for all contract workspaces with any status value and that meet criteria specified in the other elements. You must specify at least one filter (ContractIds, ContractStatus, a FromDate and ToDate pair, or WorkspaceIds).If you specify ContractStatus, you must also specify a FromDate and ToDate pair.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="FromDate" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:documentation>Start date for a date range. The web service converts this to a calendar date (hours, minutes, and seconds are set to 0) and exports all workspaces that were last updated after the start of the FromDate date and before the start of the ToDate date (items updated after the start of the ToDate are excluded). Example: 2013-01-31T12:00:00. You must specify at least one filter (ContractIds, ContractStatus, a FromDate and ToDate pair, or WorkspaceIds).If you specify ContractStatus, you must also specify a FromDate and ToDate pair.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ToDate" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:documentation>End date for a date range. The web service converts this to a calendar date (hours, minutes, and seconds are set to 0) and exports all workspaces that were last updated after the start of the FromDate date and before the start of the ToDate date (items updated after the start of the ToDate are excluded).Example: 2013-02-28T12:00:00. You must specify at least one filter (ContractIds, ContractStatus, a FromDate and ToDate pair, or WorkspaceIds).If you specify ContractStatus, you must also specify a FromDate and ToDate pair.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="WorkspaceIds" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>List of workspace IDs for which the headers will be exported, comma separated. For example: CW2005,CW2006 If omitted, the web service exports headers for all contract workspaces with any workspace ID and that meet criteria specified in the other elements. Example: CW2005,CW2006. You must specify at least one filter (ContractIds, ContractStatus, a FromDate and ToDate pair, or WorkspaceIds).If you specify ContractStatus, you must also specify a FromDate and ToDate pair.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="WSContractHeaderExportOutputBean">
+        <xsd:all>
+          <xsd:element name="ErrorMessage" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Message returned from the service execution.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="HeaderExportFile" type="xsd:base64Binary">
+            <xsd:annotation>
+              <xsd:documentation>Contract Workspace Header file exported from the service. Contains a base64-encoded ZIP file with a CSV file. The CSV file contains rows of header fields, one row per workspace.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="MimeType" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>MIME encoding type used for the header export document. The mime type of the exported file is application/zip.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="Status" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:documentation>Return status. 0 indicates success.Status code returned from the service execution.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:all>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="HeadersMessage">
+    <part element="typens:Headers" name="header"/>
+  </wsdl:message>
+  <wsdl:message name="ContractHeaderExportRequestMessage">
+    <part element="typens:ContractHeaderExportRequest" name="body"/>
+  </wsdl:message>
+  <wsdl:message name="ContractHeaderExportReplyMessage">
+    <part element="typens:ContractHeaderExportReply" name="body"/>
+  </wsdl:message>
+  <wsdl:portType name="ContractHeaderExportPortType">
+    <wsdl:operation name="ContractHeaderExportOperation">
+      <wsdl:input message="typens:ContractHeaderExportRequestMessage"/>
+      <wsdl:output message="typens:ContractHeaderExportReplyMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ContractHeaderExportBinding" type="typens:ContractHeaderExportPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ContractHeaderExportOperation">
+      <soap:operation soapAction="/Process Definition"/>
+      <wsdl:input>
+        <soap:header message="typens:HeadersMessage" part="header" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:header message="typens:HeadersMessage" part="header" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ContractHeaderExport">
+    <wsdl:documentation>Ariba Web Service</wsdl:documentation>
+    <wsdl:port binding="typens:ContractHeaderExportBinding" name="ContractHeaderExportPortType">
+      <soap:address location="https://s1-eu.ariba.com/Sourcing/soap/saec-T/ContractHeaderExport"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://s1-eu.ariba.com/Sourcing/soap/saec-T/ContractHeaderExport</con:endpoint></con:endpoints><con:operation id="304df13e-92be-4a47-b6c8-1e8139195dc9" isOneWay="false" action="/Process Definition" name="ContractHeaderExportOperation" bindingOperationName="ContractHeaderExportOperation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="471ef37e-e438-477c-ad12-86faa5edad89" name="Request 1" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Content-Type" value="text/xml;charset=UTF-8" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://s1-eu.ariba.com/Sourcing/soap/saec-T/ContractHeaderExport</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:Ariba:Sourcing:vrealm_51073">\r
+   <soapenv:Header>\r
+      <urn:Headers>\r
+      </urn:Headers>\r
+   </soapenv:Header>\r
+   <soapenv:Body>\r
+      <urn:ContractHeaderExportRequest>\r
+         <urn:WSContractHeaderExportInputBean_Item>\r
+            <urn:item>\r
+               <urn:ClassName>ariba.collaborate.contracts.InternalContractWorkspace</urn:ClassName>\r
+            </urn:item>\r
+         </urn:WSContractHeaderExportInputBean_Item>\r
+      </urn:ContractHeaderExportRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>BIUSER</con:username><con:password>@ccT3ch!@#!@#</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:preemptive>true</con:preemptive><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="/Process Definition"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="1ba2df8a-365e-4d92-a344-9092fbb2fc36" name="ContractHeaderExportBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="a0b68fae-9eee-4248-b865-686733c614f2" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="ContractHeaderExportOperation TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="0968b1ae-bc3d-42d0-8960-87488fc0ae75" name="ContractHeaderExportOperation"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ContractHeaderExportBinding</con:interface><con:operation>ContractHeaderExportOperation</con:operation><con:request name="ContractHeaderExportOperation" id="d146a8d4-9e76-4de0-8444-9270cc33ad61"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://s1-eu.ariba.com/Sourcing/soap/saec-T/ContractHeaderExport</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:Ariba:Sourcing:vrealm_51073">\r
+   <soapenv:Header>\r
+      <urn:Headers>\r
+         <!--You may enter the following 2 items in any order-->\r
+         <!--Optional:-->\r
+         <urn:variant>?</urn:variant>\r
+         <!--Optional:-->\r
+         <urn:partition>?</urn:partition>\r
+      </urn:Headers>\r
+   </soapenv:Header>\r
+   <soapenv:Body>\r
+      <urn:ContractHeaderExportRequest partition="?" variant="?">\r
+         <!--Optional:-->\r
+         <urn:WSContractHeaderExportInputBean_Item>\r
+            <!--Optional:-->\r
+            <urn:item>\r
+               <!--You may enter the following 6 items in any order-->\r
+               <urn:ClassName>?</urn:ClassName>\r
+               <!--Optional:-->\r
+               <urn:ContractIds>?</urn:ContractIds>\r
+               <!--Optional:-->\r
+               <urn:ContractStatus>?</urn:ContractStatus>\r
+               <!--Optional:-->\r
+               <urn:FromDate>?</urn:FromDate>\r
+               <!--Optional:-->\r
+               <urn:ToDate>?</urn:ToDate>\r
+               <!--Optional:-->\r
+               <urn:WorkspaceIds>?</urn:WorkspaceIds>\r
+            </urn:item>\r
+         </urn:WSContractHeaderExportInputBean_Item>\r
+      </urn:ContractHeaderExportRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="/Process Definition"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:mockService id="3ac87889-25ab-4f89-946a-780bada1a9ba" port="8080" path="/" host="PYROMANIAC" name="MockService 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="ContractHeaderExportOperation" id="9f46e0eb-c001-4217-9eb7-45b24889b3ae" interface="ContractHeaderExportBinding" operation="ContractHeaderExportOperation"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="5292f5fa-8495-47c6-907a-fb01a6a57053" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <soap:Header>
+      <Headers xmlns="urn:Ariba:Sourcing:vrealm_51073">
+         <variant>vrealm_51073</variant>
+         <partition>prealm_51073</partition>
+      </Headers>
+   </soap:Header>
+   <soap:Body>
+      <ContractHeaderExportReply xmlns="urn:Ariba:Sourcing:vrealm_51073">
+         <WSContractHeaderExportOutputBean_Item>
+            <item>
+               <Status>0</Status>
+               <ErrorMessage>The web service method is successfully executed.</ErrorMessage>
+               <HeaderExportFile>UEsDBBQACAgIAHxtRlEAAAAAAAAAAAAAAAATAAAAQ29udHJhY3RIZWFkZXJzLmNzdmVRwU7DMAy9
+7ysqzubOtWuHqDSg6jquU5Z4XVCbFDsZ9O9xOjYNONl+8Xu2X+627eP9w92i8C6Q0qEysFYcsjru
+e8tHNNDa0COUyJrsGKx3cOndBBUiwxsSJzjXGpmz+dX38PrpkIQ94HY0KuBZ+Nkbe7BolhPUhAYT
+xVNWk39HHUR6GKQjTPBkkRTpo9Wqb6cRocFOpjDUitCFvCPEQRIoeiuBYRPHUVJ6UQNCfjiIHJpM
+uoNFzqqS/4FXSlVCPvjowq6IJOp6utTncL14XmQ1y9gTlnIVXBeZq9XXaEkll+ay4tUJKXU4qFxA
+cqoXhxvskyGS5cI0id2g4uTh7zrZkW6s+LJBgx8RWTYiFIl5yFIxrpXrouoQWkyf9+PmH6uym09W
+tN+VXseEz1fdAoXIdp6mxTdQSwcIx7OlMTYBAAAeAgAAUEsBAhQAFAAICAgAfG1GUcezpTE2AQAA
+HgIAABMAAAAAAAAAAAAAAAAAAAAAAENvbnRyYWN0SGVhZGVycy5jc3ZQSwUGAAAAAAEAAQBBAAAA
+dwEAAAAA</HeaderExportFile>
+               <MimeType>application/zip</MimeType>
+            </item>
+         </WSContractHeaderExportOutputBean_Item>
+      </ContractHeaderExportReply>
+   </soap:Body>
+</soap:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="/Process Definition"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

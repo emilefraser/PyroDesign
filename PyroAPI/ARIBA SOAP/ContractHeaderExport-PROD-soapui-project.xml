@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="137fbdf9-603a-410f-aab1-3399bbd1d8ce" activeEnvironment="Default" name="ContractHeaderExport_PROD" resourceRoot="" soapui-version="5.6.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="22e1f282-95a6-4f6d-aad1-3a7abf7695f4" wsaVersion="NONE" name="ContractContentDocumentImportBinding" type="wsdl" bindingName="{urn:Ariba:Sourcing:vrealm_51070}ContractContentDocumentImportBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/efras/OneDrive/FOS/Customers/SAEC/ARIBA/ContractContentDocumentImport_PROD.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\Users\efras\OneDrive\FOS\Customers\SAEC\ARIBA\ContractContentDocumentImport_PROD.xml"><con:part><con:url>file:\C:\Users\efras\OneDrive\FOS\Customers\SAEC\ARIBA\ContractContentDocumentImport_PROD.xml</con:url><con:content><![CDATA[<wsdl:definitions name="ContractContentDocumentImport" targetNamespace="urn:Ariba:Sourcing:vrealm_51070" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:typens="urn:Ariba:Sourcing:vrealm_51070" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="urn:Ariba:Sourcing:vrealm_51070">
+      <xsd:element name="Headers">
+        <xsd:complexType>
+          <xsd:all>
+            <xsd:element maxOccurs="1" minOccurs="0" name="variant" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="partition" type="xsd:string"/>
+          </xsd:all>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ContractContentDocumentImportRequest">
+        <xsd:complexType>
+          <xsd:all>
+            <xsd:element minOccurs="0" name="WSContractContentDocumentInputBean_Item">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element maxOccurs="1" minOccurs="0" name="item" type="typens:WSContractContentDocumentInputBean"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:all>
+          <xsd:attribute name="partition" type="xsd:string"/>
+          <xsd:attribute name="variant" type="xsd:string"/>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ContractContentDocumentImportReply">
+        <xsd:complexType>
+          <xsd:all>
+            <xsd:element minOccurs="0" name="WSContractContentDocumentOutputBean_Item">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element maxOccurs="1" minOccurs="0" name="item" type="typens:WSContractContentDocumentOutputBean"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:all>
+          <xsd:attribute name="partition" type="xsd:string"/>
+          <xsd:attribute name="variant" type="xsd:string"/>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="WSContractContentDocumentInputBean">
+        <xsd:all>
+          <xsd:element name="Contents" type="xsd:base64Binary">
+            <xsd:annotation>
+              <xsd:documentation>Contract Contents that defines line items. A base64-encoded file, where the file is a pricing terms Excel file.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="IsLargeCapacity" type="xsd:boolean">
+            <xsd:annotation>
+              <xsd:documentation>Specifies the content type of the contract content document will be created or updated.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" name="OnBehalfUserId" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Specifies the user ID of the user for whom the Ariba web service will perform the action. User id on whose behalf the changes are made.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="OnBehalfUserPasswordAdapter" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Specifies the password adapter to authenticate the user in the OnBehalfUserId element.  If you are not using a custom password adapter, you can omit this element or leave the value unspecified and the web service will use the default password adapter.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ReplaceContractContent" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>if true, all the existing contents are deleted before adding the new contents.if false, all existing contents are retained and the new contents are added.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="Title" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Specifies the title of the contract content document that will be created or updated.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="WorkspaceId" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Specifies the contract workspace ID in which the contract content document will be created or updated.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="WSContractContentDocumentOutputBean">
+        <xsd:all>
+          <xsd:element name="DocumentId" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Document Id. E.g., Doc1234</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="ErrorMessage" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Message returned from the service execution.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="Status" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:documentation>Return status. 0 indicates success.Status code returned from the service execution.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:all>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="HeadersMessage">
+    <part element="typens:Headers" name="header"/>
+  </wsdl:message>
+  <wsdl:message name="ContractContentDocumentImportRequestMessage">
+    <part element="typens:ContractContentDocumentImportRequest" name="body"/>
+  </wsdl:message>
+  <wsdl:message name="ContractContentDocumentImportReplyMessage">
+    <part element="typens:ContractContentDocumentImportReply" name="body"/>
+  </wsdl:message>
+  <wsdl:portType name="ContractContentDocumentImportPortType">
+    <wsdl:operation name="ContractContentDocumentImportOperation">
+      <wsdl:input message="typens:ContractContentDocumentImportRequestMessage"/>
+      <wsdl:output message="typens:ContractContentDocumentImportReplyMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ContractContentDocumentImportBinding" type="typens:ContractContentDocumentImportPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ContractContentDocumentImportOperation">
+      <soap:operation soapAction="/Process Definition"/>
+      <wsdl:input>
+        <soap:header message="typens:HeadersMessage" part="header" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:header message="typens:HeadersMessage" part="header" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ContractContentDocumentImport">
+    <wsdl:documentation>Ariba Web Service</wsdl:documentation>
+    <wsdl:port binding="typens:ContractContentDocumentImportBinding" name="ContractContentDocumentImportPortType">
+      <soap:address location="https://s1-eu.ariba.com/Sourcing/soap/saec/ContractContentDocumentImport"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://s1-eu.ariba.com/Sourcing/soap/saec/ContractContentDocumentImport</con:endpoint></con:endpoints><con:operation id="9d570e9e-86d8-4559-9fc1-cce2073bddb2" isOneWay="false" action="/Process Definition" name="ContractContentDocumentImportOperation" bindingOperationName="ContractContentDocumentImportOperation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c48dc66d-df7b-470a-899f-3d51776a3562" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://s1-eu.ariba.com/Sourcing/soap/saec/ContractContentDocumentImport</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:Ariba:Sourcing:vrealm_51070">\r
+   <soapenv:Header>\r
+      <urn:Headers>\r
+         <!--You may enter the following 2 items in any order-->\r
+         <!--Optional:-->\r
+         <urn:variant>?</urn:variant>\r
+         <!--Optional:-->\r
+         <urn:partition>?</urn:partition>\r
+      </urn:Headers>\r
+   </soapenv:Header>\r
+   <soapenv:Body>\r
+      <urn:ContractContentDocumentImportRequest partition="?" variant="?">\r
+         <!--Optional:-->\r
+         <urn:WSContractContentDocumentInputBean_Item>\r
+            <!--Optional:-->\r
+            <urn:item>\r
+               <!--You may enter the following 7 items in any order-->\r
+               <urn:Contents>cid:1827651262</urn:Contents>\r
+               <urn:IsLargeCapacity>?</urn:IsLargeCapacity>\r
+               <urn:OnBehalfUserId>?</urn:OnBehalfUserId>\r
+               <!--Optional:-->\r
+               <urn:OnBehalfUserPasswordAdapter>?</urn:OnBehalfUserPasswordAdapter>\r
+               <!--Optional:-->\r
+               <urn:ReplaceContractContent>?</urn:ReplaceContractContent>\r
+               <urn:Title>?</urn:Title>\r
+               <urn:WorkspaceId>?</urn:WorkspaceId>\r
+            </urn:item>\r
+         </urn:WSContractContentDocumentInputBean_Item>\r
+      </urn:ContractContentDocumentImportRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="/Process Definition"/></con:call></con:operation></con:interface><con:testSuite id="6fdcc19f-a1c6-4a93-9c6a-ef0b5813d322" name="ContractContentDocumentImportBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="53312cd7-b2ed-4209-9706-b3a15cf9c9ba" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="ContractContentDocumentImportOperation TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="b5a01966-781c-449c-aa64-ac9c748cde43" name="ContractContentDocumentImportOperation"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ContractContentDocumentImportBinding</con:interface><con:operation>ContractContentDocumentImportOperation</con:operation><con:request name="ContractContentDocumentImportOperation" id="ee3f897e-09e1-4839-be42-16cba662e243"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://s1-eu.ariba.com/Sourcing/soap/saec/ContractContentDocumentImport</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:Ariba:Sourcing:vrealm_51070">\r
+   <soapenv:Header>\r
+      <urn:Headers>\r
+         <!--You may enter the following 2 items in any order-->\r
+         <!--Optional:-->\r
+         <urn:variant>?</urn:variant>\r
+         <!--Optional:-->\r
+         <urn:partition>?</urn:partition>\r
+      </urn:Headers>\r
+   </soapenv:Header>\r
+   <soapenv:Body>\r
+      <urn:ContractContentDocumentImportRequest partition="?" variant="?">\r
+         <!--Optional:-->\r
+         <urn:WSContractContentDocumentInputBean_Item>\r
+            <!--Optional:-->\r
+            <urn:item>\r
+               <!--You may enter the following 7 items in any order-->\r
+               <urn:Contents>cid:1321004626599</urn:Contents>\r
+               <urn:IsLargeCapacity>?</urn:IsLargeCapacity>\r
+               <urn:OnBehalfUserId>?</urn:OnBehalfUserId>\r
+               <!--Optional:-->\r
+               <urn:OnBehalfUserPasswordAdapter>?</urn:OnBehalfUserPasswordAdapter>\r
+               <!--Optional:-->\r
+               <urn:ReplaceContractContent>?</urn:ReplaceContractContent>\r
+               <urn:Title>?</urn:Title>\r
+               <urn:WorkspaceId>?</urn:WorkspaceId>\r
+            </urn:item>\r
+         </urn:WSContractContentDocumentInputBean_Item>\r
+      </urn:ContractContentDocumentImportRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="/Process Definition"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

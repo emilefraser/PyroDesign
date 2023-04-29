@@ -1,0 +1,239 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Product",
+    "description": "A product from Acme's catalog",
+    "type": "object"
+}
+
+The above schema has four properties
+	Called keywords
+Title and description keywords 
+	Are descriptive only
+		They do not add constraints to the data being validated. 
+		The intent of the schema is stated with these two keywords 
+		This schema describes a product
+The type keyword
+	Defines the constraint on our JSON data
+		It has to be a JSON Object
+$schema keyword 
+	This schema is written according to the draft-06 specification.
+	
+IDS?
+id is 
+	a numeric value that uniquely identifies a product
+		canonical identifier for a product
+		is required.
+		
+Is name required?
+	name is a string value that describes a product. Since there isn’t much to a product without a name, it also is required.
+	
+Can price be 0?	
+According to Acme’s docs, there are no free products. So we need to specify exclusiveMinimum. 
+If we wanted to include 0 as a valid price, we would have specified minimum instead.
+
+
+Are all tags strings?
+Finally, we come to the tags property. Unlike the previous properties, tags have many values, and is represented as a JSON array. 	
+
+
+However, Acme’s docs add two constraints:
+
+there must be at least one tag,
+all tags must be unique.
+The first constraint can be added with minItems, and the second one by specifying uniqueItems as being true
+
+************************************************************************************************
+
+An object is an unordered set of name/value pairs. 
+An object begins with { (left brace) and ends with } (right brace). 
+Each name is followed by : (colon) 
+The name/value pairs are separated by , (comma).
+
+An array is an ordered collection of values. An array begins with [ (left bracket) and ends with ] (right bracket). Values are separated by , (comma).
+
+A value can be a string in double quotes, or a number, or true or false or null, or an object or an array. These structures can be nested.
+
+A string is a sequence of zero or more Unicode characters, wrapped in double quotes, using backslash escapes. A character is represented as a single character string. A string is very much like a C or Java string.
+
+A number is very much like a C or Java number, except that the octal and hexadecimal formats are not used.
+
+Whitespace can be inserted between any pair of tokens. Excepting a few encoding details, that completely describes the language.
+
+************************************************************************************************
+SUMMARY
+************************************************************************************************
+
+object
+	{}
+	{ members }	
+		{ 
+			"string" : "value", 
+			"string" : "value" 
+		}
+		
+members
+	pair
+	pair , members
+	
+pair
+	string : value
+	
+array
+	[]
+	[ elements ]
+		["value", "value", "value"]
+		
+elements
+	value 
+	value , elements
+	
+value
+	string
+		"string"
+		
+	number
+		20
+		25.25	
+	object
+		
+	array
+	
+	boolean
+		true
+		false
+	null
+		null
+	
+string
+	""
+	" chars "
+	
+chars
+	char
+	char chars
+		\"	quotation mark
+		\\	reverse solidus
+		\/ 	solidus
+		\b	backspace
+		\f	formfeed
+		\n	newline
+		\r	carriage return
+		\t	horizontal tab
+		\u 	four-hex-digits
+	
+number
+	int
+	int frac
+	int exp
+	int frac exp
+	
+int
+	digit
+	digit1-9 digits 
+	- digit
+	- digit1-9 digits
+	
+frac
+	. digits
+	
+exp
+	e digits
+	
+digits
+	digit
+	digit digits
+	
+e
+	e
+	e+
+	e-
+	E
+	E+
+	E-
+
+
+************************************************************************************************
+
+Set of products:
+
+[
+    {
+        "id": 2,
+        "name": "An ice sculpture",
+        "price": 12.50,
+        "tags": ["cold", "ice"],
+        "dimensions": {
+            "length": 7.0,
+            "width": 12.0,
+            "height": 9.5
+        },
+        "warehouseLocation": {
+            "latitude": -78.75,
+            "longitude": 20.4
+        }
+    },
+    {
+        "id": 3,
+        "name": "A blue mouse",
+        "price": 25.50,
+        "dimensions": {
+            "length": 3.1,
+            "width": 1.0,
+            "height": 1.0
+        },
+        "warehouseLocation": {
+            "latitude": 54.4,
+            "longitude": -32.7
+        }
+    }
+]
+Set of products schema:
+
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Product set",
+    "type": "array",
+    "items": {
+        "title": "Product",
+        "type": "object",
+        "properties": {
+            "id": {
+                "description": "The unique identifier for a product",
+                "type": "number"
+            },
+            "name": {
+                "type": "string"
+            },
+            "price": {
+                "type": "number",
+                "exclusiveMinimum": 0
+            },
+            "tags": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                },
+                "minItems": 1,
+                "uniqueItems": true
+            },
+            "dimensions": {
+                "type": "object",
+                "properties": {
+                    "length": {"type": "number"},
+                    "width": {"type": "number"},
+                    "height": {"type": "number"}
+                },
+                "required": ["length", "width", "height"]
+            },
+            "warehouseLocation": {
+                "description": "Coordinates of the warehouse with the product",
+                "$ref": "http://json-schema.org/geo"
+            }
+        },
+        "required": ["id", "name", "price"]
+    }
+}
+
+
+	
+	

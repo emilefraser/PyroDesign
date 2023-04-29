@@ -1,0 +1,87 @@
+{
+  "name": "newman",
+  "version": "3.9.0-beta.3",
+  "description": "Command-line companion utility for Postman",
+  "homepage": "https://github.com/postmanlabs/newman",
+  "bugs": "https://github.com/postmanlabs/newman/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/postmanlabs/newman.git"
+  },
+  "keywords": [
+    "newman",
+    "postman",
+    "api",
+    "testing",
+    "ci",
+    "rest-client",
+    "rest"
+  ],
+  "main": "index.js",
+  "bin": {
+    "newman": "./bin/newman.js"
+  },
+  "preferGlobal": true,
+  "scripts": {
+    "test": "node npm/test.js",
+    "test-system": "node npm/test-system.js",
+    "test-lint": "node npm/test-lint.js",
+    "test-unit": "node npm/test-unit.js",
+    "test-integration": "node npm/test-integration.js",
+    "test-cli": "node npm/test-cli.js",
+    "test-library": "node npm/test-library.js",
+    "build-docs": "node npm/build-docs.js",
+    "build-wiki": "node npm/build-wiki.js",
+    "publish-docs": "node npm/publish-docs.js",
+    "publish-wiki": "node npm/publish-wiki.js"
+  },
+  "author": "Postman Labs <help@getpostman.com> (=)",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "argparse": "1.0.9",
+    "async": "2.6.0",
+    "cli-progress": "1.6.0",
+    "cli-table2": "0.2.0",
+    "colors": "1.1.2",
+    "commander": "2.11.0",
+    "csv-parse": "1.2.4",
+    "eventemitter3": "2.0.3",
+    "filesize": "3.5.11",
+    "handlebars": "4.0.11",
+    "lodash": "4.17.2",
+    "mkdirp": "0.5.1",
+    "parse-json": "3.0.0",
+    "postman-collection": "3.0.3",
+    "postman-collection-transformer": "2.4.0",
+    "postman-request": "2.81.1-postman.3",
+    "postman-runtime": "7.0.0",
+    "pretty-ms": "3.0.1",
+    "semver": "5.4.1",
+    "serialised-error": "1.1.2",
+    "shelljs": "0.7.8",
+    "word-wrap": "1.2.3",
+    "xmlbuilder": "9.0.4"
+  },
+  "devDependencies": {
+    "editorconfig": "0.15.0",
+    "eslint": "4.10.0",
+    "eslint-plugin-jsdoc": "3.2.0",
+    "eslint-plugin-lodash": "2.5.0",
+    "eslint-plugin-mocha": "4.11.0",
+    "eslint-plugin-security": "1.4.0",
+    "expect.js": "0.3.1",
+    "js-yaml": "3.10.0",
+    "jsdoc": "3.5.5",
+    "jsdoc-to-markdown": "3.0.1",
+    "mocha": "4.0.1",
+    "nsp": "2.8.1",
+    "nyc": "11.3.0",
+    "packity": "0.3.2",
+    "parse-gitignore": "0.4.0",
+    "postman-jsdoc-theme": "0.0.3",
+    "recursive-readdir": "2.2.1"
+  },
+  "engines": {
+    "node": ">=4"
+  }
+}

@@ -1,0 +1,180 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    /*<a name="line.1"></a>
+<FONT color="green">002</FONT>     * Copyright 2011 Google Inc.<a name="line.2"></a>
+<FONT color="green">003</FONT>     *<a name="line.3"></a>
+<FONT color="green">004</FONT>     * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except<a name="line.4"></a>
+<FONT color="green">005</FONT>     * in compliance with the License. You may obtain a copy of the License at<a name="line.5"></a>
+<FONT color="green">006</FONT>     *<a name="line.6"></a>
+<FONT color="green">007</FONT>     * http://www.apache.org/licenses/LICENSE-2.0<a name="line.7"></a>
+<FONT color="green">008</FONT>     *<a name="line.8"></a>
+<FONT color="green">009</FONT>     * Unless required by applicable law or agreed to in writing, software distributed under the License<a name="line.9"></a>
+<FONT color="green">010</FONT>     * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express<a name="line.10"></a>
+<FONT color="green">011</FONT>     * or implied. See the License for the specific language governing permissions and limitations under<a name="line.11"></a>
+<FONT color="green">012</FONT>     * the License.<a name="line.12"></a>
+<FONT color="green">013</FONT>     */<a name="line.13"></a>
+<FONT color="green">014</FONT>    <a name="line.14"></a>
+<FONT color="green">015</FONT>    package com.google.api.gwt.client;<a name="line.15"></a>
+<FONT color="green">016</FONT>    <a name="line.16"></a>
+<FONT color="green">017</FONT>    import com.google.gwt.core.client.Callback;<a name="line.17"></a>
+<FONT color="green">018</FONT>    import com.google.gwt.core.client.JsonUtils;<a name="line.18"></a>
+<FONT color="green">019</FONT>    import com.google.web.bindery.requestfactory.shared.RequestTransport;<a name="line.19"></a>
+<FONT color="green">020</FONT>    import com.google.web.bindery.requestfactory.shared.ServerFailure;<a name="line.20"></a>
+<FONT color="green">021</FONT>    <a name="line.21"></a>
+<FONT color="green">022</FONT>    import java.util.HashMap;<a name="line.22"></a>
+<FONT color="green">023</FONT>    import java.util.Map;<a name="line.23"></a>
+<FONT color="green">024</FONT>    <a name="line.24"></a>
+<FONT color="green">025</FONT>    /**<a name="line.25"></a>
+<FONT color="green">026</FONT>     * {@link RequestTransport} designed to communicate with Google APIs.<a name="line.26"></a>
+<FONT color="green">027</FONT>     *<a name="line.27"></a>
+<FONT color="green">028</FONT>     * @author jasonhall@google.com (Jason Hall)<a name="line.28"></a>
+<FONT color="green">029</FONT>     */<a name="line.29"></a>
+<FONT color="green">030</FONT>    public class GoogleApiRequestTransport implements RequestTransport {<a name="line.30"></a>
+<FONT color="green">031</FONT>    <a name="line.31"></a>
+<FONT color="green">032</FONT>      private final String apiKey;<a name="line.32"></a>
+<FONT color="green">033</FONT>      private final String userAgent;<a name="line.33"></a>
+<FONT color="green">034</FONT>      private final Map&lt;String, String&gt; headers = new HashMap&lt;String, String&gt;();<a name="line.34"></a>
+<FONT color="green">035</FONT>      private final String baseUrl;<a name="line.35"></a>
+<FONT color="green">036</FONT>    <a name="line.36"></a>
+<FONT color="green">037</FONT>      /**<a name="line.37"></a>
+<FONT color="green">038</FONT>       * @param applicationName the application name to be sent in the User-Agent header of requests.<a name="line.38"></a>
+<FONT color="green">039</FONT>       * @param apiKey an optional API key. See https://code.google.com/apis/console, or {@code null} to<a name="line.39"></a>
+<FONT color="green">040</FONT>       *     send no API key.<a name="line.40"></a>
+<FONT color="green">041</FONT>       */<a name="line.41"></a>
+<FONT color="green">042</FONT>      public GoogleApiRequestTransport(String applicationName, String apiKey) {<a name="line.42"></a>
+<FONT color="green">043</FONT>        this(applicationName, apiKey, "https://www.googleapis.com");<a name="line.43"></a>
+<FONT color="green">044</FONT>      }<a name="line.44"></a>
+<FONT color="green">045</FONT>    <a name="line.45"></a>
+<FONT color="green">046</FONT>      /**<a name="line.46"></a>
+<FONT color="green">047</FONT>       * @param applicationName the application name to be sent in the User-Agent header of requests.<a name="line.47"></a>
+<FONT color="green">048</FONT>       * @param apiKey an optional API key. See https://code.google.com/apis/console, or {@code null} to<a name="line.48"></a>
+<FONT color="green">049</FONT>       *     send no API key.<a name="line.49"></a>
+<FONT color="green">050</FONT>       * @param baseUrl the base URL of the Discovery service to use<a name="line.50"></a>
+<FONT color="green">051</FONT>       */<a name="line.51"></a>
+<FONT color="green">052</FONT>      public GoogleApiRequestTransport(String applicationName, String apiKey, String baseUrl) {<a name="line.52"></a>
+<FONT color="green">053</FONT>        this.apiKey = apiKey;<a name="line.53"></a>
+<FONT color="green">054</FONT>        this.userAgent =<a name="line.54"></a>
+<FONT color="green">055</FONT>            (applicationName == null ? "" : (applicationName + " ")) + "google-api-gwt-client/0.1";<a name="line.55"></a>
+<FONT color="green">056</FONT>        this.baseUrl = baseUrl;<a name="line.56"></a>
+<FONT color="green">057</FONT>      }<a name="line.57"></a>
+<FONT color="green">058</FONT>    <a name="line.58"></a>
+<FONT color="green">059</FONT>      private native void nativeSend(String payload, TransportReceiver receiver) /*-{<a name="line.59"></a>
+<FONT color="green">060</FONT>        var callback =  $entry(function(result) {<a name="line.60"></a>
+<FONT color="green">061</FONT>          if ('error' in result) {<a name="line.61"></a>
+<FONT color="green">062</FONT>            var code = result['error']['code'];<a name="line.62"></a>
+<FONT color="green">063</FONT>            var message = result['error']['message'];<a name="line.63"></a>
+<FONT color="green">064</FONT>            @com.google.api.gwt.client.GoogleApiRequestTransport::handleError(*)<a name="line.64"></a>
+<FONT color="green">065</FONT>                (code, message, receiver);<a name="line.65"></a>
+<FONT color="green">066</FONT>          } else {<a name="line.66"></a>
+<FONT color="green">067</FONT>            var resultStr = JSON.stringify(result);<a name="line.67"></a>
+<FONT color="green">068</FONT>            receiver.<a name="line.68"></a>
+<FONT color="green">069</FONT>                @com.google.web.bindery.requestfactory.shared.RequestTransport.TransportReceiver::onTransportSuccess(*)<a name="line.69"></a>
+<FONT color="green">070</FONT>                (resultStr);<a name="line.70"></a>
+<FONT color="green">071</FONT>          }<a name="line.71"></a>
+<FONT color="green">072</FONT>        });<a name="line.72"></a>
+<FONT color="green">073</FONT>    <a name="line.73"></a>
+<FONT color="green">074</FONT>        // TODO(jasonhall): Find some way to avoid this.<a name="line.74"></a>
+<FONT color="green">075</FONT>        eval('var payloadObject = ' + payload);<a name="line.75"></a>
+<FONT color="green">076</FONT>    <a name="line.76"></a>
+<FONT color="green">077</FONT>        var params = payloadObject['params'] || {};<a name="line.77"></a>
+<FONT color="green">078</FONT>        params['key'] = this.@com.google.api.gwt.client.GoogleApiRequestTransport::apiKey;<a name="line.78"></a>
+<FONT color="green">079</FONT>        params['root'] = this.@com.google.api.gwt.client.GoogleApiRequestTransport::baseUrl;<a name="line.79"></a>
+<FONT color="green">080</FONT>    <a name="line.80"></a>
+<FONT color="green">081</FONT>        // TODO(jasonhall): Set the X-JavaScript-User-Agent header<a name="line.81"></a>
+<FONT color="green">082</FONT>    <a name="line.82"></a>
+<FONT color="green">083</FONT>        $wnd.gapi.client.rpcRequest(payloadObject.method,<a name="line.83"></a>
+<FONT color="green">084</FONT>            payloadObject.apiVersion, params).execute(callback);<a name="line.84"></a>
+<FONT color="green">085</FONT>      }-*/;<a name="line.85"></a>
+<FONT color="green">086</FONT>    <a name="line.86"></a>
+<FONT color="green">087</FONT>      private static void handleError(int code, String message, TransportReceiver receiver) {<a name="line.87"></a>
+<FONT color="green">088</FONT>        receiver.onTransportFailure(new ServerFailure(code + " " + message));<a name="line.88"></a>
+<FONT color="green">089</FONT>      }<a name="line.89"></a>
+<FONT color="green">090</FONT>    <a name="line.90"></a>
+<FONT color="green">091</FONT>      @Override<a name="line.91"></a>
+<FONT color="green">092</FONT>      public void send(final String payload, final TransportReceiver receiver) {<a name="line.92"></a>
+<FONT color="green">093</FONT>        // Ensure that the API library is loaded. If it is, this callback will be executed immediately.<a name="line.93"></a>
+<FONT color="green">094</FONT>        GoogleApiLoader.get().load(new Callback&lt;Void, Exception&gt;() {<a name="line.94"></a>
+<FONT color="green">095</FONT>          @Override<a name="line.95"></a>
+<FONT color="green">096</FONT>          public void onSuccess(Void v) {<a name="line.96"></a>
+<FONT color="green">097</FONT>            makeRequest(payload, receiver);<a name="line.97"></a>
+<FONT color="green">098</FONT>          }<a name="line.98"></a>
+<FONT color="green">099</FONT>    <a name="line.99"></a>
+<FONT color="green">100</FONT>          @Override<a name="line.100"></a>
+<FONT color="green">101</FONT>          public void onFailure(Exception e) {<a name="line.101"></a>
+<FONT color="green">102</FONT>            receiver.onTransportFailure(new ServerFailure(e.getMessage()));<a name="line.102"></a>
+<FONT color="green">103</FONT>          }<a name="line.103"></a>
+<FONT color="green">104</FONT>        });<a name="line.104"></a>
+<FONT color="green">105</FONT>      }<a name="line.105"></a>
+<FONT color="green">106</FONT>    <a name="line.106"></a>
+<FONT color="green">107</FONT>      private void makeRequest(String payload, TransportReceiver receiver) {<a name="line.107"></a>
+<FONT color="green">108</FONT>        if (JsonUtils.safeToEval(payload)) {<a name="line.108"></a>
+<FONT color="green">109</FONT>          nativeSend(payload, receiver);<a name="line.109"></a>
+<FONT color="green">110</FONT>        } else {<a name="line.110"></a>
+<FONT color="green">111</FONT>          receiver.onTransportFailure(new ServerFailure("Request payload is invalid."));<a name="line.111"></a>
+<FONT color="green">112</FONT>        }<a name="line.112"></a>
+<FONT color="green">113</FONT>      }<a name="line.113"></a>
+<FONT color="green">114</FONT>    }<a name="line.114"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

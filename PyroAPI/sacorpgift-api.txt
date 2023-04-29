@@ -1,0 +1,24 @@
+api key 
+791a28f129e2046def58adf281233a4b
+
+pass
+812ac678e316da0df83a47b6d985bf97
+
+example url 
+https://791a28f129e2046def58adf281233a4b:812ac678e316da0df83a47b6d985bf97@sacorporategift.myshopify.com/admin/orders.json
+
+shared secret 
+a8fafa15e381d4d8baffbd548f446fa2
+
+Private applications authenticate with Shopify through basic HTTP authentication, 
+using the URL format https://apikey:password@hostname/admin/resource.json
+
+storefront access token 
+933b14230075c2b3fcbb541c7cfbb310
+
+
+Storefront access token
+
+933b14230075c2b3fcbb541c7cfbb310
+
+Access tokens are not secret. You can place them in a JavaScript file or any public HTML document.

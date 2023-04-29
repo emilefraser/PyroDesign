@@ -1,0 +1,1 @@
+curl -k https://791a28f129e2046def58adf281233a4b:812ac678e316da0df83a47b6d985bf97@sacorporategift.myshopify.com/admin/collection_listings.json
